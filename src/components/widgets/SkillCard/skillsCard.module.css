@@ -1,0 +1,54 @@
+div .postModule{
+    position: relative;
+    z-index: 1;
+    display: block;
+    background: #fff;
+    height: 250px;
+    /*box-shadow:0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);*/
+    margin: 0;
+    border-bottom: lightgray double 1px;
+    border-top: lightgray double 1px;
+}
+img{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.postContent{
+    justify-content: space-around;
+    position: absolute;
+    bottom: 0;
+    background: #fff;
+    width: 100%;
+}
+.category{
+    position: absolute;
+    top: -50px;
+    left: 0;
+    background:#03a9f0;
+    border-radius: 0 5px 5px 0;
+    padding: 10px 15px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.title{
+    margin: 0 0 0 5px;
+    color: darkgray;
+    font-size: 20px;
+    font-weight: 700;
+}
+.description{
+    color: rgb(194, 192, 192);
+    margin:5px 5px;
+}
+.postMeta{
+    margin: 2px 0;
+    color: #03a9f0;
+    border-top: lightgray solid 1px;
+    padding-top: 5px;
+}
+.postMeta span{
+    margin-left: 10px;
+}

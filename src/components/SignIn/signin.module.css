@@ -1,0 +1,34 @@
+.logContainer{  
+    text-align: center;
+}
+.content{
+    display: inline-block;
+}
+
+.circles {
+    margin: auto;
+}
+.circles button{
+    background: #03a9f0;
+    padding: 10px;
+    margin: 10px 5px;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    border: none;
+    font-size: 20px;
+    font-weight: 300;
+}
+.circles :hover{
+    background: aliceblue;
+    color: #03a9f0;
+}
+button{
+    background: #03a9f0;
+    font-size: 13px;
+    padding: 10px;
+    color: aliceblue;
+    margin: 10px 5px;
+    border-radius: 25px;
+    border: none;
+}

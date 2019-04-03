@@ -1,0 +1,31 @@
+.header{
+    background: #0392cf;
+    height: 100px;
+    box-shadow:0 0 4px 0 rgba(0, 0, 0, 0.2), 0 0 15px 0 rgba(0, 0, 0, 0.5);
+}
+.myNav{
+    padding-bottom: 0px;
+    text-align: center;
+    margin-top: 26px;
+}
+.headers{
+    font-size: 25px;
+    display: inline;
+    padding: 0 30px;
+}
+.headers a {
+    padding: 0 2px;
+}
+.navLink{
+    border-bottom: #fff solid 2px;
+}
+.headerOpt{
+    display: flex;
+}
+.logo{
+    flex-grow: 1;
+    padding-top: 8px;
+}
+.logo img{
+    width: 35px;
+}

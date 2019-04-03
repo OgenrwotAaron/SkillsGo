@@ -1,0 +1,26 @@
+.featured_item{
+    position: relative;
+}
+.featured_item a{
+    position: absolute;
+    width: 100%;
+    text-decoration: none;
+    bottom: 0px;
+    right: 0px;
+}
+.featured_image{
+    height: 330px;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+}
+.featured_caption{
+    color: #ffffff;
+    top: 0px;
+    width: 100%;
+    padding: 20px;
+    font-weight: 300;
+    font-size: 28px;
+    box-sizing: border-box;
+    position: center;
+    background: linear-gradient(to top,#000,rgba(0, 0, 0, 0.007));
+}
