@@ -6,8 +6,8 @@ import { EditorState} from 'draft-js';
 import { stateToHTML } from 'draft-js-export-html';
 import { firebaseTeams, firebaseArticles, firebase } from '../../firebase';
 import Uploader from '../widgets/FileUploader/fileUploader'
-import Map from '../widgets/Map/map';
-import SkillsCard from '../widgets/SkillCard/skillsCard';
+//import Map from '../widgets/Map/map';
+//import SkillsCard from '../widgets/SkillCard/skillsCard';
 
 class Dashboard extends Component {
 
@@ -234,7 +234,7 @@ class Dashboard extends Component {
                 <form onSubmit={this.submitForm}>
                     <h2>Add post</h2>
 
-                    <SkillsCard/>
+                    {/*<SkillsCard/>*/}
 
                     <Uploader
                         fileName={(filename)=>this.storeFilename(filename)}
@@ -263,7 +263,7 @@ class Dashboard extends Component {
                     />
                     {this.submitButton()}
                     {this.showError()}
-                    <Map/>
+                    {/*<Map/>*/}
                 </form>
                 
             </div>
