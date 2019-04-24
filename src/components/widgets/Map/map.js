@@ -8,7 +8,7 @@ class Map extends Component {
     state = {
         style:{
             width: '100%',
-            height: 400,
+            height: 500,
         },
         viewport: {
           latitude: 37.7577,
@@ -39,7 +39,7 @@ class Map extends Component {
             <MapGL
                 style={this.state.style}
                 mapStyle="mapbox://styles/mapbox/streets-v11"
-                accessToken="#################################################################################"
+                accessToken="pk.eyJ1Ijoib2dlbnJ3b3RhYXJvbiIsImEiOiJjanRxendjbnEwM3NtM3lwMnM3ZTgxNm90In0.p_6NicSsgXEMHJ0c9o1n1A"
                 {...this.state.viewport}
                 onViewportChange={(viewport)=> this.setState({viewport})}
             >

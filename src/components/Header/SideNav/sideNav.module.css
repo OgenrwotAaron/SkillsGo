@@ -13,3 +13,7 @@
     color: white;
     margin: 10px;
 }
+.back{
+    background: url(/images/articles/mechanic.jpg) no-repeat center;
+    height: 100px;
+}

@@ -24,7 +24,7 @@ const FormFields = ({ formdata,change,id }) => {
         switch(formdata.element){
             case('input'):
                     formTemplate = (
-                        <div>
+                        <div className={styles.input}>
                             <input
                                 {...formdata.config}
                                 value={formdata.value}

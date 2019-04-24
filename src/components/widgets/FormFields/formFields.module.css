@@ -4,3 +4,11 @@
     margin-top: 5px;
     padding: 5px;
 }
+* :focus{
+    outline: none;
+}
+.input{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}

@@ -1,9 +1,14 @@
 .header{
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    width: 100%;
+    margin-bottom: 5px;
     background: #0392cf;
-    height: 100px;
+    height: 40px;
     box-shadow:0 0 4px 0 rgba(0, 0, 0, 0.2), 0 0 15px 0 rgba(0, 0, 0, 0.5);
 }
-.myNav{
+/*.myNav{
     padding-bottom: 0px;
     text-align: center;
     margin-top: 26px;
@@ -18,14 +23,20 @@
 }
 .navLink{
     border-bottom: #fff solid 2px;
-}
+}*/
 .headerOpt{
     display: flex;
 }
 .logo{
-    flex-grow: 1;
-    padding-top: 8px;
+    color: #fff;
+    padding-top: 10px;
+    font-size: 18px;
+    font-weight: 300;
 }
-.logo img{
+.account{
+    float: right;
+    padding:5px 0 0 20px;
+}
+/*.logo img{
     width: 35px;
-}
+}*/

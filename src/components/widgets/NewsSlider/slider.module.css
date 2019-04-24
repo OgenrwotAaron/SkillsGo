@@ -24,3 +24,17 @@
     position: center;
     background: linear-gradient(to top,#000,rgba(0, 0, 0, 0.007));
 }
+@media (min-width:501px){
+    .featured_item{
+        margin: 45px 5px 5px 5px;
+        height: 250px;
+    }
+    .featured_image{
+        background-size: cover !important;
+        border-radius: 10px;
+        height: 250px;
+    }
+    .featured_caption{
+        border-radius: 0 0 10px 10px;
+    }
+}

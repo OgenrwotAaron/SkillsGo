@@ -1,34 +1,18 @@
-.logContainer{  
+.logContainer{
     text-align: center;
+    border: 1px solid lightgray;
+    width: 70%;
+    background: gainsboro;
+    margin-left: 15%;
+    margin-top: 10%;
 }
-.content{
-    display: inline-block;
+.names input{
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
 }
-
-.circles {
-    margin: auto;
-}
-.circles button{
-    background: #03a9f0;
-    padding: 10px;
-    margin: 10px 5px;
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
-    border: none;
-    font-size: 20px;
-    font-weight: 300;
-}
-.circles :hover{
-    background: aliceblue;
-    color: #03a9f0;
-}
-button{
-    background: #03a9f0;
-    font-size: 13px;
-    padding: 10px;
-    color: aliceblue;
-    margin: 10px 5px;
-    border-radius: 25px;
-    border: none;
+.normalInput input{
+    float: left;
+    width: 80%;
+    margin-left: 10px;
 }

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import styles from './register.module.css';
 import FormFields from '../widgets/FormFields/formFields';
 import { firebase } from '../../firebase';
+import FontAwesome from 'react-fontawesome';
+import {Link} from 'react-router-dom';
 
 class Register extends Component {
 
@@ -42,6 +44,36 @@ class Register extends Component {
                 validationMessage:''
             }
         }
+    }
+    items=[
+        {
+            type: styles.option,
+            icon: 'google'
+        },
+        {
+            type: styles.option,
+            icon: 'facebook'
+        },
+        {
+            type: styles.option,
+            icon: 'twitter'
+        },
+        {
+            type: styles.option,
+            icon: 'linkedin'
+        }
+    ]
+
+    element = (item,i)=>(
+        <button key={i} className={item.type}>
+                <FontAwesome name={item.icon}/>
+        </button>
+    )
+
+    circles=()=>{
+        return this.items.map((item,i)=> {
+            return this.element(item,i)
+        })
     }
 
     updateForm = (element)=>{
@@ -144,7 +176,10 @@ class Register extends Component {
         'Loading...'
         :
         <div>
-            <button onClick={(event)=>this.submitForm(event,false)}>Register Now</button>
+            {/*<button onClick={(event)=>this.submitForm(event,false)}>Register Now</button>*/}
+            <Link to='/sign-up'>
+                <button>Register As Mechanic</button>
+            </Link>
             <button onClick={(event)=>this.submitForm(event,true)}>Log in</button> 
         </div>
         
@@ -159,7 +194,10 @@ class Register extends Component {
         return (
             <div className={styles.logContainer}>
                 <form onClick={(event)=>this.submitForm(event,null)}>
-                    <h2>Register / Login</h2>
+                    <h2 style={{color:'gray'}}>Login</h2>
+                    <div className={styles.circles}>
+                        {this.circles()}
+                    </div>
                     <FormFields
                         id={'email'}
                         formdata={this.state.formdata.email}

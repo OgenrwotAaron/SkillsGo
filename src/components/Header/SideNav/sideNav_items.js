@@ -16,8 +16,8 @@ const SideNavItems = (props) => {
         },
         {
             type: styles.option,
-            icon: 'file-text-o',
-            text: 'News',
+            icon: 'map-marker',
+            text: 'Mechanics',
             link: '/news',
             login:''
         },
@@ -105,7 +105,7 @@ const SideNavItems = (props) => {
 
     return (
         <div>
-            <div>
+            <div className={styles.back}>
                 <FontAwesome name="arrow-left"
                     onClick={props.onHideNav}
                     style={{

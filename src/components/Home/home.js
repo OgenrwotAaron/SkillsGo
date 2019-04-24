@@ -3,34 +3,62 @@ import NewsSlider from '../widgets/NewsSlider/slider'
 import NewsList from '../widgets/NewsList/newsList';
 import VideosList from '../widgets/VideosList/videosList';
 import FloatButton from '../widgets/Buttons/floatingButton';
+import Header from '../Header/header';
+import styles from './home.module.css';
 
-const Home = () => {
+const Home =(props)=>{
+
     return (
-        <div>
-            <NewsSlider
-                type="featured"
-                start={6}
-                amount={9}
-                settings={{
-                    dots:false
-                }}
-            />
-            <NewsList
-                type="card"
-                loadmore={false}
-                start={3}
-                amount={3}
-            />
-            <VideosList
-                type="card"
-                loadmore={true}
-                start={9}
-                amount={3}
-                title={true}
-            />
-            <FloatButton/>
-        </div>
-    );
+            <div>
+                <Header
+                    user={props.user}
+                    headerText={"Home"}
+                    link={"/"}
+                />
+
+                <div style={{height:'40px'}}></div>
+                <div className={styles.body}>
+                    <div className={styles.nav}>
+                        <div style={{fontSize:'18px',fontWeight:300,paddingLeft:'5PX',textAlign:'center',color:'gray'}}>TRENDING UPDATES</div>
+                        <NewsList
+                            type="card"
+                            loadmore={false}
+                            start={1}
+                            amount={10}
+                        />
+                    </div>
+                    <div className={styles.mainSection}>
+                        <NewsSlider
+                            type="featured"
+                            start={5}
+                            amount={9}
+                            settings={{
+                                dots:false
+                            }}
+                        />
+                        <NewsList
+                            type="card"
+                            loadmore={false}
+                            start={1}
+                            amount={10}
+                        />
+                        <FloatButton
+                            type="Post"
+                        />
+                    </div>
+                    <div className={styles.recentUpdates}>
+                    <div style={{fontSize:'18px',fontWeight:300,paddingLeft:'5PX',textAlign:'center',color:'gray'}}>TOP MECHANICS</div>
+                        <VideosList
+                            type="card"
+                            loadmore={true}
+                            start={0}
+                            amount={10}
+                            title={false}
+                        />
+                    </div>
+                </div>
+            </div>
+        );
 };
 
 export default Home;

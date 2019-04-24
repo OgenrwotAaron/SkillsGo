@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Map from '../widgets/Map/map'
 
 class SkillsMain extends Component {
 
@@ -9,7 +10,7 @@ class SkillsMain extends Component {
     render() {
         return (
             <div>
-                This is your skill
+                <Map/>
             </div>
         );
     }

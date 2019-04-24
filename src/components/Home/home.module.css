@@ -1,0 +1,56 @@
+.body{
+    padding-right: 5px;
+    height: 100%;
+}
+.mainSection{
+    width: 64.6%;
+    float: left;
+}
+.recentUpdates{
+    overflow-y: auto;
+    width: 35%;
+    height: 100%;
+    right: 0;
+    border-width: 0 1px 1px 1px;
+    border-style: solid;
+    border-color: rgb(226, 226, 226);
+    position: fixed;
+}
+
+@media (max-width: 425px) {
+    .body{
+        padding-right: 0;
+    }
+
+    .recentUpdates {
+      display: none;
+    }
+    .mainSection{
+        width: 100%;
+    }
+}
+@media (max-width:1000px){
+    .nav{
+        display: none;
+    }
+}
+@media (min-width:1024px){
+    .mainSection{
+        width: 49.9%;
+        margin-left: 25.3%;
+    }
+    .recentUpdates{
+        width: 25%;
+    }
+    .nav{
+        width: 25%;
+        float: left;
+        z-index: 1;
+        overflow-y: auto;
+        height: 100%;
+        border-width: 0 1px 1px 1px;
+        border-style: solid;
+        border-color: rgb(226, 226, 226);
+        position: fixed;
+    }
+}

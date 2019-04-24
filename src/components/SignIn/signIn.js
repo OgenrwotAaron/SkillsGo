@@ -1,73 +1,225 @@
 import React, { Component } from 'react';
 import styles from './signin.module.css';
-import FontAwesome from 'react-fontawesome';
-import { Link } from 'react-router-dom'
+import FormFields from '../widgets/FormFields/formFields';
+import { firebase } from '../../firebase';
+//import Header from '../Header/header'
 
 class SignIn extends Component {
 
-    state={
+    state = {
         registerError:'',
-        loading:false
-    }
-    items=[
-        {
-            type: styles.option,
-            icon: 'google'
-        },
-        {
-            type: styles.option,
-            icon: 'facebook'
-        },
-        {
-            type: styles.option,
-            icon: 'twitter'
-        },
-        {
-            type: styles.option,
-            icon: 'linkedin'
+        loading: false,
+        formdata:{
+            fname:{
+                element:'input',
+                value:'',
+                config:{
+                    name:'email-input',
+                    type:'text',
+                    placeholder:'Enter your Firstname'
+                },
+                validation:{
+                    required:true
+                },
+                valid:true,
+                touched:false,
+                validationMessage:''
+            },
+            lname:{
+                element:'input',
+                value:'',
+                config:{
+                    name:'lastname-input',
+                    type:'text',
+                    placeholder:'Enter your Lastname'
+                },
+                validation:{
+                    required:true
+                },
+                valid:true,
+                touched:false,
+                validationMessage:''
+            },
+            email:{
+                element:'input',
+                value:'',
+                config:{
+                    name:'email-input',
+                    type:'email',
+                    placeholder:'Enter your Email'
+                },
+                validation:{
+                    required:true,
+                    email:true
+                },
+                valid:false,
+                touched:false,
+                validationMessage:''
+            },
+            password:{
+                element:'input',
+                value:'',
+                config:{
+                    name:'password-input',
+                    type:'password',
+                    placeholder:'Enter your Password'
+                },
+                validation:{
+                    required:true,
+                    password:true
+                },
+                valid:false,
+                touched:false,
+                validationMessage:''
+            }
         }
-    ]
+    }
 
+    updateForm = (element)=>{
+        const newFormdata= {
+            ...this.state.formdata
+        }
+        const newElement = {
+            ...newFormdata[element.id]
+        }
+        newElement.value = element.event.target.value;
+        if(element.blur){
+            let validData = this.validate(newElement);
+            newElement.valid = validData[0];
+            newElement.validationMessage = validData[1];
+        }
+
+        newElement.touched = element.blur
+        newFormdata[element.id]=newElement;
+
+        this.setState({
+            formdata:newFormdata
+        })
+    }
+
+    validate = (element)=>{
+        let error = [true,''];
+
+        if(element.validation.email){
+            const valid = /\S+@\S+\.\S+/.test(element.value);
+            const message = `${!valid ? '  Must be a valid email':''}`;
+            error = !valid ? [valid,message]:error
+        }
+
+        if(element.validation.password){
+            const valid = element.value.length >= 5;
+            const message = `${!valid ? '  Must be greater than five':''}`;
+            error = !valid ? [valid,message]:error
+        }
+
+        if(element.validation.required){
+            const valid = element.value.trim() !== '';
+            const message = `${!valid ? '  This field is required':''}`;
+            error = !valid ? [valid,message]:error
+        }
+        return error;
+    }
+
+    submitForm = (event,type)=>{
+        event.preventDefault();
+        if(type!==null){
+
+            let dataToSubmit = {};
+            let formIsValid = true;
+
+            for(let key in this.state.formdata){
+                dataToSubmit[key]=this.state.formdata[key].value
+            }
+            for(let key in this.state.formdata){
+                formIsValid = this.state.formdata[key].valid && formIsValid
+            }
+            if(formIsValid){
+                this.setState({
+                    loading:true,
+                    registerError:''
+                })
+                if(type){
+                    firebase.auth()
+                    .signInWithEmailAndPassword(
+                        dataToSubmit.email,
+                        dataToSubmit.password
+                    ).then(()=>{
+                        this.props.history.push('/')
+                    }).catch(error=>{
+                        this.setState({
+                            loading:false,
+                            registerError:error.message 
+                        })
+                    })
+                }else{
+                    firebase.auth()
+                    .createUserWithEmailAndPassword(
+                        dataToSubmit.email,
+                        dataToSubmit.password
+                    ).then(()=>{
+                        this.props.history.push('/')
+                    }).catch(error=>{
+                        this.setState({
+                            loading:false,
+                            registerError:error 
+                        })
+                    })
+                }
+            }
+
+        }
+    }
+
+    submitButton = ()=>(
+        this.state.loading ?
+        'Loading...'
+        :
+        <div>
+            <button onClick={(event)=>this.submitForm(event,false)}>Register Now</button>
+            {/*<button onClick={(event)=>this.submitForm(event,true)}>Log in</button>*/}
+        </div>
+        
+    )
     showError = ()=>(
         this.state.registerError !=='' ? 
         <div className={styles.error}>{this.state.registerError}</div>
         :''
     )
 
-    gsign = ()=>{
-
-    }
-
-    fbLogin = ()=>{
-
-    }
-
-    element = (item,i)=>(
-        <button key={i} className={item.type}>
-                <FontAwesome name={item.icon}/>
-        </button>
-    )
-
-    circles=()=>{
-        return this.items.map((item,i)=> {
-            return this.element(item,i)
-        })
-    }
-
-
     render() {
         return (
-            <wrapper className={styles.logContainer}>
-                <div className={styles.content}>
-                    <h3>Login with</h3>
-                    <div className={styles.circles}>
-                        {this.circles()}
+            <div className={styles.logContainer}>
+                <form onClick={(event)=>this.submitForm(event,null)}>
+                    <h2 style={{color:'gray'}}>Register</h2>
+                    <div className={styles.names}>
+                       <FormFields
+                            id={'fname'}
+                            formdata={this.state.formdata.fname}
+                            change={(element)=>this.updateForm(element)}
+                        />
+                        <FormFields
+                            id={'lname'}
+                            formdata={this.state.formdata.lname}
+                            change={(element)=>this.updateForm(element)}
+                        /> 
                     </div>
+                    <div className={styles.normalInput}>
+                        <FormFields
+                            id={'email'}
+                            formdata={this.state.formdata.email}
+                            change={(element)=>this.updateForm(element)}
+                        />
+                        <FormFields
+                            id={'password'}
+                            formdata={this.state.formdata.password}
+                            change={(element)=>this.updateForm(element)}
+                        />  
+                    </div>
+                    
+                    {this.submitButton()}
                     {this.showError()}
-                    <h3>Or</h3>
-                    <Link to="/sign-up"><button>Register Skill</button></Link>
-                </div>    
-            </wrapper>
+                </form>
+            </div>
         );
     }
 }

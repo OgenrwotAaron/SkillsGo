@@ -1,14 +1,23 @@
-import React from 'react';
-import {NavLink, Link} from 'react-router-dom';
+import React,{Component} from 'react';
+import { Link} from 'react-router-dom';
 
 import FontAwesome from 'react-fontawesome';
 
 import style from './header.module.css';
 import SideNav from './SideNav/sideNav';
 
-const Header = (props) => {
+class Header extends Component {
+    state={
+        showNav:false
+    }
 
-    const items=[
+    toggleSidenav=(action)=>{
+        this.setState({
+            showNav:action
+        })
+    }
+
+    /*const items=[
         {
             type: style.option,
             icon: 'home',
@@ -18,24 +27,24 @@ const Header = (props) => {
         },
         {
             type: style.option,
-            icon: 'gears',
+            icon: 'map-marker',
             text: 'Home',
             link: '/news',
             login:''
         },
         {
             type: style.option,
-            icon: 'share',
+            icon: 'tachometer',
             text: 'Home',
             link: '/videos',
             login:''
         }
-    ]
+    ]*/
 
-    const navBars=()=>(
+    navBars=()=>(
         <div>
             <FontAwesome name="bars"
-                onClick={props.onOpenNav}
+                onClick={()=>this.toggleSidenav(true)}
                 style={{
                     color:'#dfdfdf',
                     padding:'10px',
@@ -45,7 +54,7 @@ const Header = (props) => {
         </div>
     )
 
-    const showItems=()=>{
+    /*const showItems=()=>{
         return items.map((item,i)=> {
             return headers(item,i)
         })
@@ -64,27 +73,40 @@ const Header = (props) => {
             </NavLink>
         </div>
         
-    )
+    )*/
 
-    const logo=() =>(
-            <Link to="/" className={style.logo}>
-                <img alt="nba logo" src="/images/nba_logo.png"/>
+    logo=() =>(
+            <Link to={this.props.link} className={style.logo}>
+                {/*<img alt="nba logo" src="/images/nba_logo.png"/>*/}
+                <div>{this.props.headerText}</div>
             </Link>
     )
     
 
-    return (
-       <header className={style.header}>
-            <SideNav {...props}/>
-           <div className={style.headerOpt}>
-                {navBars()}
-                {logo()}
-           </div>
-           <div className={style.myNav}>
-                {showItems()}
-           </div>
-       </header>
-    )
+    render(){
+        return (
+            <header className={style.header}>
+                <SideNav showNav={this.state.showNav} onHideNav={()=>this.toggleSidenav(false)}/>
+                <div className={style.account}>
+                    <FontAwesome
+                        name="user"
+                        style={{
+                            color:'white',
+                            paddingRight:'5px',
+                            fontSize:'25px'
+                        }}
+                    />
+                </div>
+                <div className={style.headerOpt}>
+                    {this.navBars()}
+                    {this.logo()}
+                </div>
+                {/*<div className={style.myNav}>
+                    {showItems()}
+                </div>*/}
+            </header>
+        )
+    }
 }
 
 export default Header;

@@ -20,12 +20,12 @@ const Routes =(props)=> {
                 <Switch>
                     <PublicRoutes {...props} restricted={false} path="/" exact component={Home}/>
                     <PublicRoutes {...props} restricted={false} path="/news" exact component={NewsMain}/>
-                    <PublicRoutes {...props} restricted={false} path="/skills" exact component={SkillsMain}/>
+                    <PublicRoutes {...props} restricted={false} path="/mechanics" exact component={SkillsMain}/>
                     <PublicRoutes {...props} restricted={false} path="/videos" exact component={VideosMain}/>
                     <PublicRoutes {...props} restricted={false} path="/articles/:id" exact component={NewsArticle}/>
                     <PublicRoutes {...props} restricted={false} path="/videos/:id" exact component={VideoArticle}/>
-                    <PublicRoutes {...props} restricted={false} path="/sign-up" exact component={Register}/>
-                    <PublicRoutes {...props} restricted={false} path="/sign-in" exact component={Signin}/>
+                    <PublicRoutes {...props} restricted={false} path="/sign-in" exact component={Register}/>
+                    <PublicRoutes {...props} restricted={false} path="/sign-up" exact component={Signin}/>
                     <PrivateRoutes {...props} path="/dashboard" exact component={Dashboard}/>
                 </Switch>
             </Layout>

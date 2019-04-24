@@ -42,6 +42,25 @@ const SliderTemplates = (props) => {
                 )
             })
             break;
+        case('topSlick'):
+            template=props.data.map((item,i)=>{
+                return(
+                    <div key={i}>
+                        <div className={styles.featured_item}>
+                            <div className={styles.featured_image}
+                                style={{
+                                    background:`url(${item.image})`
+                            }}></div>
+                            <Link to={`/articles/${item.id}`}>
+                                <div className={styles.featured_caption}>
+                                    {item.title}
+                                </div>
+                            </Link>
+                        </div>
+                    </div>
+                )
+            })
+            break;
         default:
             template=null;
     }
