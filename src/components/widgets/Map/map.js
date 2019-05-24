@@ -151,7 +151,20 @@ class Map extends Component {
     render() {
         return (
         <div>
+<<<<<<< HEAD
             {this.renderMap()}
+=======
+            <MapGL
+                style={this.state.style}
+                mapStyle="mapbox://styles/mapbox/streets-v11"
+                accessToken="######################"
+                {...this.state.viewport}
+                onViewportChange={(viewport)=> this.setState({viewport})}
+            >
+                <GeolocateControl position="top-right"/>
+                <NavigationControl showCompass showZoom position="top-right"/>
+            </MapGL>
+>>>>>>> 270d7ae3d99349c79294d26a05103586147aab68
         </div>
                 
         );
