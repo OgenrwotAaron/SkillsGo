@@ -6,7 +6,7 @@ const config = {
     databaseURL: "https://nba-fullstack-8dda7.firebaseio.com",
     projectId: "nba-fullstack-8dda7",
     storageBucket: "nba-fullstack-8dda7.appspot.com",
-    messagingSenderId: "155216418198"
+    messagingSenderId: "#########"
 };
 
 firebase.initializeApp(config);
