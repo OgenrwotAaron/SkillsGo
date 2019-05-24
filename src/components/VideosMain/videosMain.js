@@ -6,6 +6,7 @@ import Header from '../Header/header';
 import styles from './videos.module.css';
 import NewsList from '../widgets/NewsList/newsList'
 import TopSlider from '../widgets/NewsSlider/topSlider';
+import FloatButton from '../widgets/Buttons/floatingButton';
 
 const VideosMain = (props) => {
     return (
@@ -65,6 +66,9 @@ const VideosMain = (props) => {
                         title={false}
                     />
                 </div>
+                <FloatButton
+                    type="Post"
+                />
             </div>
         </div>
         

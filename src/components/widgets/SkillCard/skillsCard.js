@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import styles from './skillsCard.module.css';
 import FontAwesome from 'react-fontawesome';
-import { Link } from 'react-router-dom'
+import { firebaseArticles, firebaseLooper } from '../../../firebase';
+//import { Link } from 'react-router-dom'
 
 class SkillsCard extends Component {
 
@@ -35,6 +36,16 @@ class SkillsCard extends Component {
         ]
     }
 
+    componentWillMount = () => {
+      firebaseArticles.once('value')
+      .then((snapshot)=>{
+          const articles=firebaseLooper(snapshot)
+          console.log(articles)
+      })
+      .catch(e=>{
+          console.log(e)
+      })
+    };
     
 
     showCards = ()=>{
@@ -81,7 +92,7 @@ class SkillsCard extends Component {
             <div className={styles.postImage}>
                 <img alt="postImage" src={item.image}/>
             </div>
-            <div className={styles.postMetas}>
+            {/*<div className={styles.postMetas}>
                 <FontAwesome 
                     name="thumbs-o-up"
                     style={{
@@ -108,7 +119,7 @@ class SkillsCard extends Component {
                     onClick={()=>this.toggleDropDown(true)}
                 />
                 3 shares
-            </div>
+                </div>*/}
         </div>
         /*<div key={i} className={styles.postModule}>
             <Link to={`${item.category}`}>

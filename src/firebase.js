@@ -15,6 +15,8 @@ const firebaseDB= firebase.database();
 const firebaseArticles = firebaseDB.ref('articles');
 const firebaseTeams = firebaseDB.ref('teams');
 const firebaseVideos = firebaseDB.ref('videos');
+const firebaseDistricts = firebaseDB.ref('districts');
+const firebaseUsers = firebaseDB.ref('users');
 
 const firebaseLooper = (snapshot)=>{
     const data = []
@@ -29,10 +31,12 @@ const firebaseLooper = (snapshot)=>{
 }
 
 export {
+    firebaseUsers,
     firebaseDB,
     firebaseArticles,
     firebase,
     firebaseTeams,
     firebaseVideos,
-    firebaseLooper
+    firebaseLooper,
+    firebaseDistricts
 }

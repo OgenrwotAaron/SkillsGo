@@ -24,13 +24,6 @@ const SideNavItems = (props) => {
         {
             type: styles.option,
             icon: 'play',
-            text: 'Videos',
-            link: '/videos',
-            login:''
-        },
-        {
-            type: styles.option,
-            icon: 'play',
             text: 'Dashboard',
             link: '/dashboard',
             login:false

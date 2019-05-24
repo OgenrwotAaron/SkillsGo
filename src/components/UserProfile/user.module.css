@@ -1,0 +1,221 @@
+.option{
+    background: #03a9f0;
+    border: none;
+    border-radius: 25px;
+    font-size: 25px;
+    margin: 5px;
+    width: 50px;
+    height: 50px;
+    color: white;
+}
+.mainInfo ul {
+    text-decoration: none;
+    text-align: center;
+}
+.mainInfo li{
+    display: inline;
+    padding-right: 10px;
+    font-weight: bolder;
+    color: #0596d4;
+}
+
+@media(max-width:499px){
+    .info{
+        text-align: center;
+        font-weight: 550;
+        color: rgb(61, 60, 60);
+    }
+    .mainInfo{
+        margin-top: 100px;
+        position: sticky;
+        top:0;
+        z-index: 1;
+        background: rgb(233, 233, 233);
+    }
+    .imageBox{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        height: 260px;
+    }
+    .cover{
+        position: relative;
+        max-height: 100%;
+    }
+    .coverContent{
+        width: 100%;
+        height: 100%;
+    }
+    .avatar{
+        position: absolute;
+        z-index: 1;
+        right: 35%;
+        bottom: -100px;
+        text-align: center;
+    }
+    .editCover{
+        position: absolute;
+        bottom: 0px;
+        z-index: 1;
+        right: 0;
+        padding: 10px 15px;
+        font-weight: 600;
+    }
+    .nav{
+        display: none;
+    }
+}
+@media(min-width:500px){
+    .info{
+        text-align: center;
+        font-weight: 550;
+        color: rgb(61, 60, 60);
+        border-bottom: rgb(219, 219, 219) 1px solid;
+        padding: 0 5px;
+    }
+    
+    .mainInfo{
+        margin-top: 100px;
+        position: sticky;
+        top:0;
+        float: left;
+        z-index: 1;
+        margin-left: 10px;
+        background: #fff;
+        border-radius: 5px;
+        width: 40%;
+    }
+    .imageBox{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        height: 250px;
+    }
+    .feeds{
+        float: right;
+        width: 58%;
+        margin: 10px 0 20px 0;
+    }
+    .avatar{
+        position: absolute;
+        z-index: 1;
+        left: 16%;
+        top: 200px;
+        text-align: center;
+    }
+    .editCover{
+        position: absolute;
+        top: 200px;
+        z-index: 1;
+        right: 0;
+        padding: 10px 15px;
+        font-weight: 600;
+    }
+}
+@media(min-width:900px){
+    .info{
+        text-align: center;
+        font-weight: 550;
+        color: rgb(61, 60, 60);
+        border-bottom: rgb(219, 219, 219) 1px solid;
+        padding: 0 5px;
+    }
+    
+    .mainInfo{
+        margin-top: 100px;
+        position: sticky;
+        top:0;
+        float: left;
+        z-index: 1;
+        margin-left: 10px;
+        background: #fff;
+        border-radius: 5px;
+        width: 50%;
+    }
+    .imageBox{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        height: 250px;
+    }
+    .feeds{
+        float: right;
+        width: 45%;
+        margin: 10px 0 20px 0;
+    }
+    .avatar{
+        position: absolute;
+        z-index: 1;
+        left: 40%;
+        top: 200px;
+        text-align: center;
+    }
+    .editCover{
+        position: absolute;
+        top: 200px;
+        z-index: 1;
+        right: 0;
+        padding: 10px 15px;
+        font-weight: 600;
+    }
+}
+@media(min-width:1075px){
+    .info{
+        text-align: center;
+        font-weight: 550;
+        color: rgb(61, 60, 60);
+        border-bottom: rgb(219, 219, 219) 1px solid;
+        padding: 0 5px;
+    }
+    
+    .mainInfo{
+        margin-top: 100px;
+        position: sticky;
+        top:0;
+        float: left;
+        z-index: 1;
+        margin-left: 10px;
+        background: #fff;
+        border-radius: 5px;
+        width: 50%;
+    }
+    .imageBox{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        height: 250px;
+    }
+    .profile{
+        margin: 0 50px;
+    }
+    .feeds{
+        float: right;
+        width: 48%;
+        margin: 10px 0 20px 0;
+    }
+    .avatar{
+        position: absolute;
+        z-index: 1;
+        left: 20%;
+        top: 200px;
+        text-align: center;
+    }
+    .editCover{
+        position: absolute;
+        top: 200px;
+        z-index: 1;
+        right: 0;
+        padding: 10px 15px;
+        font-weight: 600;
+    }
+}
+/*img{
+    max-width: 100%;
+}*/
+
+.avatar img{
+    max-width: 100px;
+    height: 100px;
+    border: #03a9f0 solid 3px;
+    border-radius: 100% 100% 100% 100%;
+}

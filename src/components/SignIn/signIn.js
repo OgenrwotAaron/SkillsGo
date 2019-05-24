@@ -1,42 +1,53 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import styles from './signin.module.css';
 import FormFields from '../widgets/FormFields/formFields';
-import { firebase } from '../../firebase';
-//import Header from '../Header/header'
+import { firebase,firebaseDistricts, firebaseUsers } from '../../firebase';
+import Uploader from '../widgets/FileUploader/fileUploader';
+import FontAwesome from 'react-fontawesome';
+import { Marker} from '@urbica/react-map-gl';
+import CompleteRegistration from '../CompleteRegister/completeRegister';
 
 class SignIn extends Component {
 
     state = {
+        lng:'',
+        lat:'',
         registerError:'',
         loading: false,
         formdata:{
-            fname:{
+            firstName:{
                 element:'input',
                 value:'',
                 config:{
                     name:'email-input',
                     type:'text',
-                    placeholder:'Enter your Firstname'
+                    placeholder:'Firstname'
                 },
                 validation:{
                     required:true
                 },
-                valid:true,
+                valid:false,
                 touched:false,
                 validationMessage:''
             },
-            lname:{
+            image:{
+                element:'image',
+                value:'',
+                valid:true
+            },
+            lastName:{
                 element:'input',
                 value:'',
                 config:{
                     name:'lastname-input',
                     type:'text',
-                    placeholder:'Enter your Lastname'
+                    placeholder:'Lastname'
                 },
                 validation:{
                     required:true
                 },
-                valid:true,
+                valid:false,
                 touched:false,
                 validationMessage:''
             },
@@ -46,7 +57,7 @@ class SignIn extends Component {
                 config:{
                     name:'email-input',
                     type:'email',
-                    placeholder:'Enter your Email'
+                    placeholder:'Email address'
                 },
                 validation:{
                     required:true,
@@ -62,7 +73,7 @@ class SignIn extends Component {
                 config:{
                     name:'password-input',
                     type:'password',
-                    placeholder:'Enter your Password'
+                    placeholder:'Password'
                 },
                 validation:{
                     required:true,
@@ -71,18 +82,122 @@ class SignIn extends Component {
                 valid:false,
                 touched:false,
                 validationMessage:''
+            },
+            businessName:{
+                element:'input',
+                value:'',
+                config:{
+                    name:'businessName-input',
+                    type:'text',
+                    placeholder:'Business Name'
+                },
+                validation:{
+                    required:true
+                },
+                valid:false,
+                touched:false,
+                validationMessage:''
+            },
+            district:{
+                element:'select',
+                value:'',
+                config:{
+                    name:'district-input',
+                    options:[]
+                },
+                validation:{
+                    required:true
+                },
+                valid:false,
+                touched:false,
+                validationMessage:''
+            },
+            address:{
+                element:'input',
+                value:'',
+                config:{
+                    name:'address-input',
+                    type:'address',
+                    placeholder:'Street Address'
+                },
+                validation:{
+                    required:true
+                },
+                valid:false,
+                touched:false,
+                validationMessage:''
             }
         }
     }
 
-    updateForm = (element)=>{
+    componentDidMount(){
+        this.loadDistricts()
+    }
+    clicked=(e)=>{
+        console.log(e.lngLat.lng,e.lngLat.lat)
+        this.setState({
+            lng:e.lngLat.lng,
+            lat:e.lngLat.lat
+        })
+    }
+
+    setMarker=()=>(
+        <Marker
+            longitude={this.state.lng}
+            latitude={this.state.lat}
+        >
+            <div style={{
+            color: 'red',
+            cursor: 'pointer',
+            fontSize: '25px',
+          }}>
+                <FontAwesome
+                    name="map-marker"
+                />
+            </div>
+        </Marker>
+    )
+
+    loadDistricts = ()=>{
+        firebaseDistricts.once('value')
+        .then((snapshot)=>{
+            let team=[]
+
+            snapshot.forEach((childSnapshot) => {
+                team.push({
+                    id:childSnapshot.val().id,
+                    name:childSnapshot.val().district
+                })
+            });
+
+            const newFormdata ={...this.state.formdata}
+            const newElement = { ...newFormdata['district']}
+
+            newElement.config.options=team;
+            newFormdata['district']= newElement;
+
+            this.setState({
+                formdata:newFormdata
+            })
+
+        })
+    }
+
+    updateForm = (element, content='')=>{
         const newFormdata= {
             ...this.state.formdata
         }
         const newElement = {
             ...newFormdata[element.id]
         }
-        newElement.value = element.event.target.value;
+
+        //newElement.value = element.event.target.value;
+        if(content===''){
+            newElement.value = element.event.target.value;
+        }else{
+            newElement.value = content
+        }
+
         if(element.blur){
             let validData = this.validate(newElement);
             newElement.valid = validData[0];
@@ -138,25 +253,55 @@ class SignIn extends Component {
                     loading:true,
                     registerError:''
                 })
-                if(type){
-                    firebase.auth()
-                    .signInWithEmailAndPassword(
-                        dataToSubmit.email,
-                        dataToSubmit.password
-                    ).then(()=>{
-                        this.props.history.push('/')
-                    }).catch(error=>{
-                        this.setState({
-                            loading:false,
-                            registerError:error.message 
-                        })
-                    })
-                }else{
+                if(!type){
                     firebase.auth()
                     .createUserWithEmailAndPassword(
                         dataToSubmit.email,
                         dataToSubmit.password
-                    ).then(()=>{
+                    )
+                    .then(()=>{
+                        firebaseUsers.orderByChild('id')
+                        .limitToLast(1).once('value')
+                        .then( snapshot =>{
+                            let userId= null;
+
+                            snapshot.forEach(childSnapshot=>{
+                                userId = childSnapshot.val().id
+                            })
+                            dataToSubmit['date']= firebase.database.ServerValue.TIMESTAMP;
+                            dataToSubmit['id']=+1;
+                            dataToSubmit['district'] = parseInt(dataToSubmit['district'],10);
+                            /*firebase.auth().onAuthStateChanged((user)=>{
+                                if(user){
+                                    dataToSubmit['uid']=user.uid
+                                }else{
+                                    console.log('no user')
+                                }
+                            })*/
+
+                            firebaseUsers.push({
+                                firstName:dataToSubmit.firstName,
+                                lastName:dataToSubmit.lastName,
+                                businessName:dataToSubmit.businessName,
+                                email:dataToSubmit.email,
+                                district:dataToSubmit.district,
+                                address:dataToSubmit.address,
+                                date:dataToSubmit.date,
+                                id:dataToSubmit.id,
+                                lng:this.state.lng,
+                                lat:this.state.lat
+                            })
+                            .then( (user) =>{
+                                console.log(user)
+                                this.props.history.push("/")
+                            }).catch(e=>{
+                                this.setState({
+                                postError:e.message
+                            })
+                            })
+                            return userId;
+                        })
+                        console.log(dataToSubmit)
                         this.props.history.push('/')
                     }).catch(error=>{
                         this.setState({
@@ -175,35 +320,53 @@ class SignIn extends Component {
         'Loading...'
         :
         <div>
+            <Link to={"/"}>
+                <button>Cancel</button>
+            </Link>
             <button onClick={(event)=>this.submitForm(event,false)}>Register Now</button>
-            {/*<button onClick={(event)=>this.submitForm(event,true)}>Log in</button>*/}
         </div>
         
     )
     showError = ()=>(
         this.state.registerError !=='' ? 
-        <div className={styles.error}>{this.state.registerError}</div>
+        <div className={styles.error}>{this.state.registerError.message}</div>
         :''
     )
+    storeFilename=(filename)=>{
+        this.updateForm({id:'image'},filename)
+    }
 
     render() {
         return (
+            <div className={styles.registerMain}>
+                <CompleteRegistration clicked={(e)=>this.clicked(e)} setMarker={this.setMarker()}/>
             <div className={styles.logContainer}>
-                <form onClick={(event)=>this.submitForm(event,null)}>
+                <form onSubmit={(event)=>this.submitForm(event,null)}>
                     <h2 style={{color:'gray'}}>Register</h2>
+                    <div className={styles.avatar}>
+                        <Uploader 
+                            imageFolder={'userAvatar'}
+                            fileName={(filename)=>{this.storeFilename(filename)}}
+                        />
+                    </div>
                     <div className={styles.names}>
-                       <FormFields
-                            id={'fname'}
-                            formdata={this.state.formdata.fname}
+                        <FormFields
+                            id={'firstName'}
+                            formdata={this.state.formdata.firstName}
                             change={(element)=>this.updateForm(element)}
                         />
                         <FormFields
-                            id={'lname'}
-                            formdata={this.state.formdata.lname}
+                            id={'lastName'}
+                            formdata={this.state.formdata.lastName}
                             change={(element)=>this.updateForm(element)}
                         /> 
                     </div>
                     <div className={styles.normalInput}>
+                        <FormFields
+                            id={'businessName'}
+                            formdata={this.state.formdata.businessName}
+                            change={(element)=>this.updateForm(element)}
+                        />
                         <FormFields
                             id={'email'}
                             formdata={this.state.formdata.email}
@@ -215,10 +378,22 @@ class SignIn extends Component {
                             change={(element)=>this.updateForm(element)}
                         />  
                     </div>
-                    
+                    <div className={styles.names}>
+                        <FormFields
+                            id={'district'}
+                            formdata={this.state.formdata.district}
+                            change={(element)=>this.updateForm(element)}
+                        />
+                        <FormFields
+                            id={'address'}
+                            formdata={this.state.formdata.address}
+                            change={(element)=>this.updateForm(element)}
+                        />
+                    </div>
                     {this.submitButton()}
                     {this.showError()}
                 </form>
+            </div>
             </div>
         );
     }

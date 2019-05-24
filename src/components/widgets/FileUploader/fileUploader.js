@@ -31,7 +31,7 @@ class Uploader extends Component {
             name:filename
         })
         ///
-        firebase.storage().ref('images')
+        firebase.storage().ref(`${this.props.imageFolder}`)
         .child(filename).getDownloadURL()
         .then( url =>{
             this.setState({fileURL:url})
@@ -60,7 +60,7 @@ class Uploader extends Component {
                     accept="image/*"
                     name='image'
                     randomizeFilename
-                    storageRef={firebase.storage().ref('images')}
+                    storageRef={firebase.storage().ref(`${this.props.imageFolder}`)}
                     onUploadStart={this.handleUploadStart}
                     onUploadError={this.handleUploadError}
                     onUploadSuccess={this.handleUploadSuccess}

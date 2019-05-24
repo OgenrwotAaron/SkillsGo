@@ -46,7 +46,7 @@ class Header extends Component {
             <FontAwesome name="bars"
                 onClick={()=>this.toggleSidenav(true)}
                 style={{
-                    color:'#dfdfdf',
+                    color:'#fff',
                     padding:'10px',
                     cursor:'pointer'
                 }}
@@ -86,17 +86,20 @@ class Header extends Component {
     render(){
         return (
             <header className={style.header}>
-                <SideNav showNav={this.state.showNav} onHideNav={()=>this.toggleSidenav(false)}/>
-                <div className={style.account}>
-                    <FontAwesome
-                        name="user"
-                        style={{
-                            color:'white',
-                            paddingRight:'5px',
-                            fontSize:'25px'
-                        }}
-                    />
-                </div>
+                <SideNav user={this.props.user}showNav={this.state.showNav} onHideNav={()=>this.toggleSidenav(false)}/>
+                <Link to="/user">
+                    <div className={style.account}>
+                        <FontAwesome
+                            name="user"
+                            style={{
+                                color:'#fff',
+                                paddingRight:'5px',
+                                fontSize:'25px'
+                            }}
+                        />
+                    </div>
+                </Link>
+
                 <div className={style.headerOpt}>
                     {this.navBars()}
                     {this.logo()}

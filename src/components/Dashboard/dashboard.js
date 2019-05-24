@@ -120,7 +120,6 @@ class Dashboard extends Component {
             newElement.value = content
         }
         
-
         if(element.blur){
             let validData = this.validate(newElement);
             newElement.valid = validData[0];
@@ -134,6 +133,7 @@ class Dashboard extends Component {
             formdata:newFormdata
         })
     }
+
     validate = (element)=>{
         let error = [true,''];
 
@@ -238,6 +238,7 @@ class Dashboard extends Component {
 
                     <Uploader
                         fileName={(filename)=>this.storeFilename(filename)}
+                        imageFolder={'images'}
                     />
 
                     <FormFields

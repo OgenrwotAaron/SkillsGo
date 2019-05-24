@@ -52,6 +52,7 @@ img{
     margin-right: 5px;
 }
 .postMeta{
+    display: none;
     position: relative;
     color: lightgray;
     border-top: 1px solid #e6e7e7;

@@ -176,7 +176,6 @@ class Register extends Component {
         'Loading...'
         :
         <div>
-            {/*<button onClick={(event)=>this.submitForm(event,false)}>Register Now</button>*/}
             <Link to='/sign-up'>
                 <button>Register As Mechanic</button>
             </Link>
@@ -184,11 +183,12 @@ class Register extends Component {
         </div>
         
     )
-    showError = ()=>(
-        this.state.registerError !=='' ? 
-        <div className={styles.error}>{this.state.registerError}</div>
-        :''
-    )
+    showError = ()=>{
+        console.log(this.state.registerError)
+        return (this.state.registerError !=='' ? 
+        <div className={styles.error}>{this.state.registerError.message}</div>
+        :'')
+    }
 
     render() {
         return (

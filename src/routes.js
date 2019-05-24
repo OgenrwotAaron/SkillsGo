@@ -13,6 +13,8 @@ import Dashboard from './components/Dashboard/dashboard';
 import SkillsMain from './components/Skills/index'
 import PublicRoutes from './components/AuthRoutes/publicRoutes';
 import PrivateRoutes from './components/AuthRoutes/privateRoutes'
+import UserProfile from './components/UserProfile/userProfile';
+import CompleteRegistration from './components/CompleteRegister/completeRegister';
 
 const Routes =(props)=> {
         return (
@@ -25,7 +27,9 @@ const Routes =(props)=> {
                     <PublicRoutes {...props} restricted={false} path="/articles/:id" exact component={NewsArticle}/>
                     <PublicRoutes {...props} restricted={false} path="/videos/:id" exact component={VideoArticle}/>
                     <PublicRoutes {...props} restricted={false} path="/sign-in" exact component={Register}/>
+                    <PublicRoutes {...props} restricted={false} path="/register" exact component={CompleteRegistration}/>
                     <PublicRoutes {...props} restricted={false} path="/sign-up" exact component={Signin}/>
+                    <PublicRoutes {...props} restricted={false} path="/user" exact component={UserProfile}/>
                     <PrivateRoutes {...props} path="/dashboard" exact component={Dashboard}/>
                 </Switch>
             </Layout>
