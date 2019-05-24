@@ -108,7 +108,7 @@ class Map extends Component {
                         <MapGL
                         style={this.state.style}
                         mapStyle="mapbox://styles/mapbox/streets-v11"
-                        accessToken="pk.eyJ1Ijoib2dlbnJ3b3RhYXJvbiIsImEiOiJjanRxendjbnEwM3NtM3lwMnM3ZTgxNm90In0.p_6NicSsgXEMHJ0c9o1n1A"
+                        accessToken="####################"
                         {...this.state.viewport}
                         onViewportChange={(viewport)=> this.setState({viewport})}
                         >
@@ -130,7 +130,7 @@ class Map extends Component {
                         }}
                         cursor="pointer"
                         mapStyle="mapbox://styles/mapbox/streets-v11"
-                        accessToken="pk.eyJ1Ijoib2dlbnJ3b3RhYXJvbiIsImEiOiJjanRxendjbnEwM3NtM3lwMnM3ZTgxNm90In0.p_6NicSsgXEMHJ0c9o1n1A"
+                        accessToken="##################################"
                         {...this.state.viewport}
                         onViewportChange={(viewport)=> this.setState({viewport})}
                         >
